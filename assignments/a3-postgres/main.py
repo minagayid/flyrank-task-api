@@ -1,9 +1,10 @@
 import os, psycopg
+from psycopg.rows import dict_row
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 app=FastAPI(title='Task API - Postgres')
 class TaskIn(BaseModel): title:str; done:bool=False
-def conn(): return psycopg.connect(os.getenv('DATABASE_URL','postgresql://tasks:tasks@db:5432/tasks'))
+def conn(): return psycopg.connect(os.getenv('DATABASE_URL','postgresql://tasks:tasks@db:5432/tasks'), row_factory=dict_row)
 def init():
     with conn() as c:
         c.execute('CREATE TABLE IF NOT EXISTS tasks(id SERIAL PRIMARY KEY,title TEXT NOT NULL,done BOOLEAN NOT NULL DEFAULT FALSE)')
