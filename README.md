@@ -1,52 +1,26 @@
-# Task API
+# FlyRank Backend AI Engineering — Assignments
 
-A small in-memory CRUD API built with Python and FastAPI for the FlyRank Backend Track Week 2 assignment. Data intentionally resets when the server restarts; there is no database or file storage.
+Public submission repository for the FlyRank Backend AI Engineering track. The original Week 2 CRUD API is at the repository root; later assignments are in `assignments/`.
 
-## Run it
+| Assignment | Folder | Minimum deliverable |
+|---|---|---|
+| BE-01 | root | In-memory FastAPI CRUD API with Swagger |
+| BE-02 | `assignments/a2-sqlite` | SQLite-backed CRUD with restart persistence |
+| BE-04 | `assignments/a3-postgres` | Docker Compose + Postgres volume + `.env.example` |
+| BE-03 | `assignments/a4-auth` | Supabase signup/login, bearer dependency, protected routes |
+| BE-05 | `assignments/a5-scraper` | Polite, schema-checked 60-book scraper |
+| BE-07 | `assignments/a6-ai-api` | Schema-validated judgement endpoint, retries, 8-case tests, no-cost fallback |
+| BE-06 | `assignments/a7-background` | 202 background jobs, status, retry, attempts |
+| BE-08 | `assignments/a8-pdf-report` | On-demand PDF report artifact and download URL |
 
-```bash
-python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-.venv/bin/uvicorn main:app --reload
-```
-
-The API runs at <http://localhost:8000>. Interactive Swagger UI is at <http://localhost:8000/docs>.
-
-![Swagger UI](swagger.png)
-
-## Endpoints
-
-| Method | Path | Purpose | Success | Errors |
-|---|---|---|---:|---|
-| GET | `/` | Describe the API | 200 | — |
-| GET | `/health` | Health check | 200 | — |
-| GET | `/tasks` | List all tasks | 200 | — |
-| GET | `/tasks/{id}` | Get one task | 200 | 404 |
-| POST | `/tasks` | Create a task (`title` required) | 201 | 400 |
-| PUT | `/tasks/{id}` | Update `title` and/or `done` | 200 | 400, 404 |
-| DELETE | `/tasks/{id}` | Delete a task | 204 | 404 |
-
-## Example curl output
-
-```text
-$ curl -i http://localhost:8000/tasks/1
-HTTP/1.1 200 OK
-content-type: application/json
-
-{"id":1,"title":"Learn HTTP basics","done":true}
-```
-
-## CRUD examples
+## BE-01 run command
 
 ```bash
-curl -i -X POST http://localhost:8000/tasks -H 'Content-Type: application/json' -d '{"title":"Buy milk"}'
-curl -i -X PUT http://localhost:8000/tasks/4 -H 'Content-Type: application/json' -d '{"done":true}'
-curl -i -X DELETE http://localhost:8000/tasks/4
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt && .venv/bin/uvicorn main:app --reload
 ```
 
-Invalid or empty titles return `400` with a JSON error. Unknown task IDs return `404` with a JSON error. The complete CRUD cycle can also be run from Swagger UI's **Try it out** controls.
+Swagger: <http://localhost:8000/docs>. The original CRUD tests are in `tests/`.
 
-## Tests
+## Verification notes
 
-```bash
-.venv/bin/pytest
-```
+The projects are intentionally small and self-contained. Copy each folder's `.env.example` where provided; never commit secrets. The AI and scraper examples are designed to run without paid credits.

@@ -2,3 +2,6 @@
 __pycache__/
 .pytest_cache/
 *.pyc
+assignments/a2-sqlite/tasks.db
+assignments/a5-scraper/books.json
+assignments/a8-pdf-report/reports/
