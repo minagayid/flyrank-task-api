@@ -11,6 +11,8 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 
 The API runs at <http://localhost:8000>. Interactive Swagger UI is at <http://localhost:8000/docs>.
 
+![Swagger UI](swagger.png)
+
 ## Endpoints
 
 | Method | Path | Purpose | Success | Errors |
