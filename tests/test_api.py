@@ -1,15 +1,15 @@
 from fastapi.testclient import TestClient
 
-from main import app, tasks
+from main import Task, app, tasks
 
 client = TestClient(app)
 
 
 def setup_function():
     tasks[:] = [
-        {"id": 1, "title": "Learn HTTP basics", "done": True},
-        {"id": 2, "title": "Build a CRUD API", "done": False},
-        {"id": 3, "title": "Test with Swagger UI", "done": False},
+        Task(id=1, title="Learn HTTP basics", done=True),
+        Task(id=2, title="Build a CRUD API", done=False),
+        Task(id=3, title="Test with Swagger UI", done=False),
     ]
 
 
